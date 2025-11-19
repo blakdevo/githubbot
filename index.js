@@ -37,7 +37,7 @@ client.once('ready', async () => {
     new SlashCommandBuilder()
       .setName('event')
       .setDescription('Create a new lobby event')
-      .addStringOption(o => o.setName('name').setDescription('Event name').setRequired(true))
+      .addStringOption(o => o.setName('name('name').setDescription('Event name').setRequired(true))
       .addStringOption(o => o.setName('description').setDescription('Event description').setRequired(true))
       .addStringOption(o => o.setName('when').setDescription('When? (in 3 hours, 3 saat sonra, 22:30, yarın 21:00)').setRequired(true))
       .addIntegerOption(o => o.setName('slots').setDescription('Max players (1-3)').setRequired(true).setMinValue(1).setMaxValue(3))
@@ -108,7 +108,7 @@ client.on('interactionCreate', async (interaction) => {
     if (interaction.commandName === 'event') {
       if (!interaction.member.roles.cache.some(r => BOSS_ADMIN_ROLES.includes(r.name))) return interaction.reply({ content: 'Only **BOSS/ADMIN**!', ephemeral: true });
 
-      const name = interaction.options.getString('name);
+      const name = interaction.options.getString('name');
       const description = interaction.options.getString('description');
       const when = interaction.options.getString('when').trim();
       const slots = interaction.options.getInteger('slots');
@@ -464,7 +464,7 @@ function startTimerForChannel(channel) {
   system.timer = setInterval(() => updateLobbyEmbed(channel), 1000);
 }
 
-// VERIFICATION SISTEMİ
+// VERIFICATION
 client.on('guildMemberAdd', async (member) => {
   if (member.guild.id !== GUILD_ID) return;
 
