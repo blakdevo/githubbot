@@ -341,7 +341,7 @@ function parseTimeInput(input) {
 }
 
 function createEventEmbed(name, desc, startTime, maxSlots, participants) {
-  const timeStr = `<t:${Math.floor(startTime / 1000)}:F> (<t:${Math.floor(startTime / 1000}:R>)`;
+  const timeStr = `<t:${Math.floor(startTime / 1000)}:F> (<t:${Math.floor(startTime / 1000)}:R>)`;
   return new EmbedBuilder()
     .setTitle(`LOBBY EVENT: ${name}`)
     .setDescription(desc)
@@ -372,3 +372,4 @@ async function autoStartRentSystem(eventId) {
 // guildMemberAdd ve messageCreate verification aynı kalıyor
 
 client.login(process.env.BOT_TOKEN);
+
