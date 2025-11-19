@@ -37,7 +37,7 @@ client.once('ready', async () => {
     new SlashCommandBuilder()
       .setName('event')
       .setDescription('Create a new lobby event')
-      .addStringOption(o => o.setName('name('name').setDescription('Event name').setRequired(true))
+      .addStringOption(o => o.setName('name').setDescription('Event name').setRequired(true))
       .addStringOption(o => o.setName('description').setDescription('Event description').setRequired(true))
       .addStringOption(o => o.setName('when').setDescription('When? (in 3 hours, 3 saat sonra, 22:30, yarın 21:00)').setRequired(true))
       .addIntegerOption(o => o.setName('slots').setDescription('Max players (1-3)').setRequired(true).setMinValue(1).setMaxValue(3))
@@ -532,3 +532,4 @@ client.on('messageCreate', async (message) => {
 });
 
 client.login(process.env.BOT_TOKEN);
+
