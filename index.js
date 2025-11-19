@@ -136,8 +136,9 @@ client.on('interactionCreate', async (interaction) => {
   }
 
   if (interaction.isButton()) {
-    if (interaction.customId === 'book_button') {
-      showReservationModal(interaction);
+  if (interaction.customId === 'book_button') {
+    showReservationModal(interaction);
+  }
 
     if (interaction.customId.startsWith('join_event_')) {
       const eventId = interaction.customId.split('_')[2];
@@ -305,3 +306,4 @@ function startTimerForChannel(channel) {
 // member add ve messageCreate verification kısmı tamamen aynı kalıyor (uzun diye buraya koymadım ama senin orijinal kodunda var, onu da bırak)
 
 client.login(process.env.BOT_TOKEN);
+
