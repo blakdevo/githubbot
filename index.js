@@ -306,25 +306,20 @@ function parseTimeInput(input) {
   input = input.toLowerCase().trim();
   const now = Date.now();
 
-  // DÜZELTME 1: "in" zorunluluğu kalktı. "3 saat", "3 saat sonra", "10 dk", "30 dakika" formatları çalışır.
   const relativeMatch = input.match(/(\d+)\s*(saat|hour|h|dakika|minute|dk|m)/);
   if (relativeMatch) {
     const num = parseInt(relativeMatch[1]);
     const unit = relativeMatch[2];
 
-    // Dakika kontrolü (dk, m, dakika, minute ile başlayanlar)
     if (unit.startsWith('d') || unit.startsWith('m')) { 
       return now + num * 60000;
     }
-    // Saat varsayılan
     return now + num * 3600000;
   }
 
-  // DÜZELTME 2: "Yarın" mantığı (Saat verilmezse varsayılan 21:00 kalır)
   if (input.includes('tomorrow') || input.includes('yarın')) {
     let date = new Date();
     date.setDate(date.getDate() + 1);
-    // 21:00 veya 21.00 desteği
     const m = input.match(/(\d{1,2})[:.](\d{2})/) || input.match(/(\d{1,2})/); 
     
     if (m && m.length > 2) {
@@ -337,7 +332,6 @@ function parseTimeInput(input) {
     return date.getTime();
   }
 
-  // DÜZELTME 3: Standart Saat (22:30 veya 22.30)
   const timeMatch = input.match(/(\d{1,2})[:.](\d{2})/);
   if (timeMatch) {
     let date = new Date();
@@ -345,13 +339,11 @@ function parseTimeInput(input) {
     const minute = parseInt(timeMatch[2]);
     date.setHours(hour, minute, 0, 0);
 
-    // Eğer girilen saat geçmişte kalıyorsa (örn: şu an 15:00 ve sen 14:00 girdin), tarihi yarına atar.
     if (date.getTime() < now) date.setDate(date.getDate() + 1);
     return date.getTime();
   }
 
   return null;
-}
 }
 
 function createEventEmbed(name, desc, startTime, maxSlots, participants) {
@@ -550,5 +542,3 @@ client.on('messageCreate', async (message) => {
 });
 
 client.login(process.env.BOT_TOKEN);
-
-
